@@ -2,29 +2,17 @@ function comparador() {
 	return Math.random() - 0.5; 
 }
 
-const arrayCards = {
-    card1: {
-        url: "/images/bobrossparrot.gif"
-    },
-    card2: {
-        url: "/images/explodyparrot.gif"
-    },
-    card3: {
-        url: "/images/fiestaparrot.gif"
-    },
-    card4: {
-        url: "/images/metalparrot.gif"
-    },
-    card5: {
-        url: "/images/revertitparrot.gif"
-    },
-    card6: {
-        url: "/images/tripletsparrot.gif"
-    },
-    card7: {
-        url: "/images/unicornparrot.gif"
-    },
-};
+const arrayCards = [
+    "/images/bobrossparrot.gif",
+    "/images/explodyparrot.gif",
+    "/images/fiestaparrot.gif",
+    "/images/metalparrot.gif",
+    "/images/revertitparrot.gif",
+    "/images/tripletsparrot.gif",
+    "/images/unicornparrot.gif",
+];
+
+let arrayGameCards = [];
 
 let amountCards = prompt('How many cards do you want to play with?');
 
@@ -33,4 +21,24 @@ while(amountCards < 4 || amountCards > 14) {
     while((amountCards%2) != 0) {
         amountCards = prompt('Enter an even number! How many cards do you want to play with?');
     }
+}
+
+arrayCards.sort(comparador);
+
+for(i=0; i < (amountCards/2); i++) {
+    arrayGameCards.push(arrayCards[i]);
+    arrayGameCards.push(arrayCards[i]);
+}
+
+arrayGameCards.sort(comparador);
+
+for(j=0; j < arrayGameCards.length; j++) {
+    const element = document.querySelector(".container");
+    const currentValue = document.querySelector(".container").innerHTML; 
+
+    element.innerHTML = currentValue + `
+        <div class="card">
+            <img src="${arrayGameCards[j]}" alt="">
+        </div>`
+    ;
 }
