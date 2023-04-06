@@ -37,7 +37,7 @@ for(j=0; j < arrayGameCards.length; j++) {
     const currentValue = document.querySelector(".container").innerHTML; 
 
     element.innerHTML = currentValue + `
-        <div onclick="clickCard(this)" class="card" data-test="card"> 
+        <div onclick="clickCard(this)" id="${j}" class="card" data-test="card"> 
             <div class="face back-face">
                 <img src="/images/back.png" alt="" data-test="face-down-image">
             </div>
@@ -107,6 +107,8 @@ function clickCard(card) {
         return;
 
     } else {
+        if(firstCard.id == card.id) {return;}
+
         srcSecondCard = card.children[1].children[0].src;
         secondCard = card
         turnCard(card)
