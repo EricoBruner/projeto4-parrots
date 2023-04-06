@@ -53,6 +53,15 @@ let firstCard = null;
 let secondCard = null;
 let srcFirstCard = null;
 let srcSecondCard = null;
+let points = 0;
+let moves = 0;
+
+function finishedGame() {
+    setTimeout(() => {
+        alert(`Você ganhou em ${moves} jogadas!`)
+    }, 400);
+    
+}
 
 function resetCard(card1, card2) {
     setTimeout(() => {
@@ -63,6 +72,21 @@ function resetCard(card1, card2) {
         srcFirstCard = null;
         srcSecondCard = null;
     }, 1000);
+}
+
+function hitCard(card1, card2) {
+    card1.onclick = null;
+    card2.onclick = null;
+    firstCard = null;
+    secondCard = null;
+    srcFirstCard = null;
+    srcSecondCard = null;
+    
+    points = points + 2;
+
+    if(points == amountCards) {
+        finishedGame() 
+    }
 }
 
 function turnCard(card) {
@@ -79,18 +103,19 @@ function clickCard(card) {
         srcFirstCard = card.children[1].children[0].src;
         firstCard = card
         turnCard(card)
+        moves++;
         return;
 
     } else {
         srcSecondCard = card.children[1].children[0].src;
         secondCard = card
         turnCard(card)
+        moves++;
 
         if(srcFirstCard == srcSecondCard) {
-            console.log('acertou');
+            hitCard(firstCard, secondCard)
             return;
         } else {
-            console.log('errou');
             resetCard(firstCard, secondCard)
             return;
         }
